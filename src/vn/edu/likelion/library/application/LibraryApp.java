@@ -15,6 +15,7 @@ public class LibraryApp {
 
         System.out.println("Library Management System is running: ");
         int chose;
+        // interface level 1
         do {
             displayMainMenu();
             chose = getValidIntInput(scanner);
@@ -35,6 +36,7 @@ public class LibraryApp {
         } while (chose != 0);
     }
 
+    // show primary menu
     private static void displayMainMenu() {
         System.out.println("Danh sách các mục:");
         System.out.println("1. Books");
@@ -43,6 +45,7 @@ public class LibraryApp {
         System.out.print("Chọn một trong các mục sau để thao tác: ");
     }
 
+    // handle books interface level 1.1
     private static void handleBooks(Library library, Scanner scanner) {
         System.out.println("Bạn đã chọn thao tác với Books !");
         displayBookMenu();
@@ -50,15 +53,19 @@ public class LibraryApp {
 
         switch (choseTask) {
             case 1:
+                // add new book
                 addBook(library, scanner);
                 break;
             case 2:
+                // edit book
                 editBook(library, scanner);
                 break;
             case 3:
+                // delete book
                 deleteBook(library, scanner);
                 break;
             case 4:
+                // list all books
                 library.listBooks();
                 break;
             default:
@@ -66,6 +73,7 @@ public class LibraryApp {
         }
     }
 
+    // menu interface level 1.1
     private static void displayBookMenu() {
         System.out.println("1. Thêm sách");
         System.out.println("2. Sửa sách");
@@ -74,6 +82,7 @@ public class LibraryApp {
         System.out.print("Chọn một trong các chức năng sau để thực hiện: ");
     }
 
+    // method to add a new book
     private static void addBook(Library library, Scanner scanner) {
         int exit = 1;
         while (exit == 1) {
@@ -90,10 +99,12 @@ public class LibraryApp {
             book.setQuantity(getValidIntInput(scanner));
             scanner.nextLine();
 
+            // check book exists
             if (!library.findBookByStt(book.getId())) {
                 if (library.findBookByTitleAndAuthor(book.getTitle(), book.getAuthor())) {
                     System.out.println("Sách đã tồn tại !");
                 } else {
+                    // add book to library
                     library.addBook(book);
                     library.listBooks();
                 }
@@ -101,6 +112,7 @@ public class LibraryApp {
                 System.out.println("Stt đã tồn tại !");
             }
 
+            // ask user to continue
             System.out.println("1. Tiếp tục thêm sách");
             System.out.println("0. Thoát");
             System.out.print("Chọn thao tác: ");
@@ -109,6 +121,7 @@ public class LibraryApp {
         }
     }
 
+    // method to edit a book
     private static void editBook(Library library, Scanner scanner) {
         System.out.println("Chức năng sửa sách");
         System.out.print("Nhập vào số thứ tự cần sửa: ");
@@ -124,6 +137,7 @@ public class LibraryApp {
 
                 switch (choseTypeEdit) {
                     case 1:
+                        // edit title
                         System.out.print("Nhập vào tên sách mới: ");
                         String newTitle = scanner.nextLine();
                         if (library.findBookByTitleAndAuthor(newTitle, library.getBook(idEdit).getAuthor())) {
@@ -135,6 +149,7 @@ public class LibraryApp {
                         library.listBooks();
                         break;
                     case 2:
+                        // edit author
                         System.out.print("Nhập vào tên tác giả mới: ");
                         String newAuthor = scanner.nextLine();
                         if (library.findBookByTitleAndAuthor(library.getBook(idEdit).getTitle(), newAuthor)) {
@@ -146,6 +161,7 @@ public class LibraryApp {
                         library.listBooks();
                         break;
                     case 3:
+                        // edit quantity
                         System.out.print("Nhập số sách nhập kho: ");
                         int newStockQuantity = getValidIntInput(scanner);
                         library.updateQuantity(idEdit, newStockQuantity);
@@ -159,6 +175,7 @@ public class LibraryApp {
         }
     }
 
+    // menu interface level 1.1.2
     private static void displayEditBookMenu() {
         System.out.println("Danh sách cập nhật: ");
         System.out.println("1. Cập nhật tên sách");
@@ -168,6 +185,7 @@ public class LibraryApp {
         System.out.print("Chọn thuộc tính cần cập nhật: ");
     }
 
+    // method to delete a book
     private static void deleteBook(Library library, Scanner scanner) {
         System.out.println("Chức năng xoá sách");
         System.out.print("Nhập vào số thứ tự cần xoá: ");
@@ -183,6 +201,7 @@ public class LibraryApp {
         }
     }
 
+    // handle rental
     private static void handleUsers(Library library, Scanner scanner) {
         System.out.println("Bạn đã chọn thao tác với Clients !");
         displayClientMenu();
@@ -191,12 +210,15 @@ public class LibraryApp {
 
         switch (choseTask) {
             case 1:
+                // add a new user
                 addClient(library, scanner);
                 break;
             case 2:
+                // edit a user
                 editClient(library, scanner);
                 break;
             case 3:
+                // display all users
                 library.listUsers();
                 break;
             default:
@@ -204,6 +226,7 @@ public class LibraryApp {
         }
     }
 
+    // menu interface level 1.2
     private static void displayClientMenu() {
         System.out.println("1. Thêm thông tin người thuê");
         System.out.println("2. Sửa thông tin người thuê");
@@ -211,6 +234,7 @@ public class LibraryApp {
         System.out.print("Chọn một trong các chức năng sau để thực hiện: ");
     }
 
+    // method to add a new user
     private static void addClient(Library library, Scanner scanner) {
         int exit = 1;
         while (exit == 1) {
@@ -218,10 +242,13 @@ public class LibraryApp {
             System.out.println("Thêm thông tin người thuê:");
             System.out.print("Nhập số thứ tự: ");
             int idUser = getValidIntInput(scanner);
+
+            // check if id already exists in the library
             if (library.findUserByStt(idUser)) {
                 System.out.println("Số thứ tự đã tồn tại!");
                 break;
             }
+
             user.setId(idUser);
             scanner.nextLine();
             System.out.print("Nhập tên: ");
@@ -229,6 +256,8 @@ public class LibraryApp {
             System.out.print("Nhập tuổi: ");
             int age = getValidIntInput(scanner);
             scanner.nextLine();
+
+            // check if age is valid
             if (age > 16) {
                 user.setAge(age);
             } else {
@@ -250,6 +279,8 @@ public class LibraryApp {
                 scanner.nextLine();
 
                 Book book = library.getBook(sttBookHire);
+
+                // check if book is available for rental
                 if (countBookHire != 0 && countBookHire <= book.getQuantity()) {
                     book.setQuantity(book.getQuantity() - countBookHire);
                     Rental rental = new Rental();
@@ -269,6 +300,7 @@ public class LibraryApp {
                     break;
                 }
 
+                // ask user if they want to rent more books
                 System.out.println("1. Tiếp tục đăng ký sách");
                 System.out.println("0. Thoát");
                 System.out.print("Chọn thao tác: ");
@@ -276,10 +308,12 @@ public class LibraryApp {
                 scanner.nextLine();
             } while (exit != 0);
 
+            // add user to the library
             user.setRentals(rentals);
             library.addUser(user);
             library.listUsers();
 
+            // ask user if they want to add more clients
             System.out.println("1. Tiếp tục thêm thông tin người thuê");
             System.out.println("0. Thoát");
             System.out.print("Chọn thao tác: ");
@@ -288,6 +322,7 @@ public class LibraryApp {
         }
     }
 
+    // edit a user
     private static void editClient(Library library, Scanner scanner) {
         System.out.println("Sửa thông tin người thuê");
         System.out.print("Nhập vào số thứ tự cần sửa: ");
@@ -324,6 +359,7 @@ public class LibraryApp {
         }
     }
 
+    // menu interface level 1.2.2
     private static void displayEditClientMenu() {
         System.out.println("Danh sách cập nhật: ");
         System.out.println("1. Cập nhật tên");
@@ -332,6 +368,7 @@ public class LibraryApp {
         System.out.print("Chọn thuộc tính cần cập nhật: ");
     }
 
+    // method to get valid value input from user
     private static int getValidIntInput(Scanner scanner) {
         while (true) {
             try {

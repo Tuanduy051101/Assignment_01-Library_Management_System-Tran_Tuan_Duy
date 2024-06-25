@@ -18,6 +18,8 @@ public class Library {
     }
 
     // book methods
+
+    // find with title
     public boolean findBookByTile(String name) {
         for (Book book : books) {
             if (book.getTitle().equalsIgnoreCase(name)) {
@@ -27,6 +29,7 @@ public class Library {
         return false;
     }
 
+    //find with stt
     public boolean findBookByStt(int stt) {
         for (Book book : books) {
             if (book.getId() == stt) {
@@ -36,6 +39,7 @@ public class Library {
         return false;
     }
 
+    // find with author
     public boolean findBookByAuthor(String author) {
         for (Book book : books) {
             if (book.getAuthor().equalsIgnoreCase(author)) {
@@ -45,6 +49,7 @@ public class Library {
         return false;
     }
 
+    // find with title and author
     public boolean findBookByTitleAndAuthor(String title, String author) {
         for (Book book : books) {
             if (book.getTitle().equalsIgnoreCase(title) && book.getAuthor().equalsIgnoreCase(author)) {
@@ -54,11 +59,12 @@ public class Library {
         return false;
     }
 
+    // add book
     public void addBook(Book book) {
         books.add(book);
     }
 
-
+    // update book
     public void updateBook(int stt, String title, String author, int quantity) {
         for (Book book : books) {
             if (book.getId() == stt) {
@@ -70,6 +76,7 @@ public class Library {
         }
     }
 
+    // update title
     public void updateTile(int stt, String title) {
         for (Book book : books) {
             if (book.getId() == stt) {
@@ -79,6 +86,7 @@ public class Library {
         }
     }
 
+    // update author
     public void updateAuthor(int stt, String author) {
         for (Book book : books) {
             if (book.getId() == stt) {
@@ -88,6 +96,7 @@ public class Library {
         }
     }
 
+    // update quantity
     public void updateQuantity(int stt, int quantity) {
         for (Book book : books) {
             if (book.getId() == stt) {
@@ -98,12 +107,13 @@ public class Library {
     }
 
 
+    // delete book
     public void deleteBook(int stt) {
         // removeIf là một method của Collections
         books.removeIf(book -> book.getId() == stt);
     }
 
-
+    // display all books
     public void listBooks() {
         if(books.isEmpty()) {
             System.out.println("Danh sách sách trống !");
@@ -114,6 +124,7 @@ public class Library {
         }
     }
 
+    // get book by stt
     public Book getBook(int stt) {
         for (Book book : books) {
             if (book.getId() == stt) {
@@ -125,6 +136,7 @@ public class Library {
 
     // user methods
 
+    // find with name
     public boolean findUserByStt(int id) {
         for (User user : users) {
             if (user.getId() == id) {
@@ -134,11 +146,12 @@ public class Library {
         return false;
     }
 
+    // add user
     public void addUser(User user) {
         users.add(user);
     }
 
-
+    // update user
     public void updateUser(int id, String name, int age) {
         for (User user : users) {
             if (user.getId() == id) {
@@ -149,6 +162,7 @@ public class Library {
         }
     }
 
+    // update name
     public void updateName(int id, String name) {
         for (User user : users) {
             if (user.getId() == id) {
@@ -158,6 +172,7 @@ public class Library {
         }
     }
 
+    // update age
     public void updateAge(int id, int age) {
         for (User user : users) {
             if (user.getId() == id) {
@@ -167,6 +182,7 @@ public class Library {
         }
     }
 
+    // display all users
     public void listUsers() {
 
         Collections.sort(users, new Comparator<User>() {
