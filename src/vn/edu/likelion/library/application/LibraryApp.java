@@ -40,7 +40,7 @@ public class LibraryApp {
     private static void displayMainMenu() {
         System.out.println("Danh sách các mục:");
         System.out.println("1. Books");
-        System.out.println("2. Client");
+        System.out.println("2. Users");
         System.out.println("0. Exit");
         System.out.print("Chọn một trong các mục sau để thao tác: ");
     }

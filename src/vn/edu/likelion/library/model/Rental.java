@@ -29,7 +29,7 @@ public class Rental {
 
     public void setRentalDate() {
         this.rentalDate = LocalDate.now();
-        this.rentalDate = this.rentalDate.plusDays(0);
+        //this.rentalDate = this.rentalDate.plusDays(0);
     }
 
     public String getReturnDate() {
